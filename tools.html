@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools — RX Network Security Labs</title>
+<meta name="description" content="Apps, tools and services built by RNSL. Live from GitHub.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦅</text></svg>">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><span class="dot"></span> RNSL</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="tools.html">Tools</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<section style="padding-top: 72px; padding-bottom: 32px;">
+  <div class="wrap">
+    <div class="eyebrow">the lab's output</div>
+    <h1>Apps, Tools<br>&amp; Services.</h1>
+    <p class="lede mt-24">
+      Everything here pulls live from our GitHub. Tag a repo and it
+      shows up automatically — no manual updates needed.
+    </p>
+    <div class="mono dim mt-16" style="font-size: 13px;" id="sync-status">syncing...</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section style="padding-bottom: 48px;">
+  <div class="wrap">
+    <div class="eyebrow">apps</div>
+    <div class="grid-3" id="apps-grid">
+      <div class="card"><div class="skel" style="height: 90px;"></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0; padding-bottom: 48px;">
+  <div class="wrap">
+    <div class="eyebrow">tools</div>
+    <div class="grid-3" id="tools-grid">
+      <div class="card"><div class="skel" style="height: 90px;"></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0; padding-bottom: 48px;">
+  <div class="wrap">
+    <div class="eyebrow">services</div>
+    <div class="grid-3" id="services-grid">
+      <div class="card"><div class="skel" style="height: 90px;"></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="eyebrow">all repositories</div>
+    <div class="grid-3" id="all-grid">
+      <div class="card"><div class="skel" style="height: 90px;"></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>// RNSL — Building what the world needs, quietly.</div>
+    <div style="display: flex; gap: 20px;">
+      <a href="https://github.com/RX-Network-Security-Labs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://t.me/rxnetworksecuritylabs" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://discord.gg/nWt82zV3s4" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/rnsl-data.js"></script>
+<script>
+function repoCard(r) {
+  return `
+    <a href="${r.html_url}" target="_blank" rel="noopener" class="card" style="display:block;">
+      <div style="display:flex; justify-content:space-between; align-items:start;">
+        <h3 class="mono" style="font-size:16px;">${rnslEscapeHtml(r.name)}</h3>
+        <span class="mono faint" style="font-size:11px;">${rnslTimeAgo(r.updated_at)}</span>
+      </div>
+      <p class="mt-16" style="font-size:14px;">${rnslEscapeHtml(r.description || "No description yet.")}</p>
+      <div class="mt-16" style="display:flex; gap:14px; align-items:center;">
+        ${r.language ? `<span class="mono faint" style="font-size:12px;"><span style="color:${rnslLangColor(r.language)}">●</span> ${rnslEscapeHtml(r.language)}</span>` : ""}
+        <span class="mono faint" style="font-size:12px;">★ ${r.stargazers_count || 0}</span>
+        <span class="mono faint" style="font-size:12px;">🍴 ${r.forks_count || 0}</span>
+      </div>
+    </a>`;
+}
+
+function emptyMsg(text) {
+  return `<div class="card center" style="grid-column: 1 / -1;"><p>${text}</p></div>`;
+}
+
+(async function() {
+  const repos = await rnslFetchRepos();
+  const syncEl = document.getElementById("sync-status");
+  const appsGrid = document.getElementById("apps-grid");
+  const toolsGrid = document.getElementById("tools-grid");
+  const servicesGrid = document.getElementById("services-grid");
+  const allGrid = document.getElementById("all-grid");
+
+  if (repos === null) {
+    syncEl.textContent = "⚠ couldn't reach GitHub — showing cached/empty state";
+    [appsGrid, toolsGrid, servicesGrid, allGrid].forEach(el => {
+      el.innerHTML = emptyMsg(`Couldn't load right now — <a href="https://github.com/RX-Network-Security-Labs" style="color:var(--signal)">view on GitHub directly →</a>`);
+    });
+    return;
+  }
+
+  syncEl.textContent = `✓ synced just now · ${repos.length} repositories`;
+
+  if (repos.length === 0) {
+    [appsGrid, toolsGrid, servicesGrid].forEach(el => {
+      el.innerHTML = emptyMsg("Nothing released yet — stay tuned.");
+    });
+    allGrid.innerHTML = emptyMsg("No public repositories yet.");
+    return;
+  }
+
+  // Fetch topics for all repos in parallel
+  const withTopics = await Promise.all(repos.map(async r => ({
+    repo: r,
+    topics: await rnslFetchTopics(r.name)
+  })));
+
+  const apps = withTopics.filter(x => x.topics.includes("rnsl-app")).map(x => x.repo);
+  const tools = withTopics.filter(x => x.topics.includes("rnsl-tool")).map(x => x.repo);
+  const services = withTopics.filter(x => x.topics.includes("rnsl-service")).map(x => x.repo);
+
+  appsGrid.innerHTML = apps.length
+    ? apps.map(repoCard).join("")
+    : emptyMsg("No apps released yet — stay tuned.");
+
+  toolsGrid.innerHTML = tools.length
+    ? tools.map(repoCard).join("")
+    : emptyMsg("Tools dropping soon.");
+
+  servicesGrid.innerHTML = services.length
+    ? services.map(repoCard).join("")
+    : emptyMsg("Services coming soon.");
+
+  const sorted = [...repos].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+  allGrid.innerHTML = sorted.map(repoCard).join("");
+})();
+</script>
+
+</body>
+</html>

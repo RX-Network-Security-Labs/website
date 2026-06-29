@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RX Network Security Labs — RNSL</title>
+<meta name="description" content="A privacy and security lab building open tools, research and infrastructure. Your data belongs to you.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦅</text></svg>">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="dot"></span> RNSL
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="tools.html">Tools</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section style="padding-top: 80px; padding-bottom: 60px;">
+  <div class="wrap">
+    <div class="eyebrow">rnsl // root</div>
+    <h1>Your data belongs<br>to <span style="color: var(--signal)">you.</span></h1>
+    <p class="lede mt-24">
+      RX Network Security Labs is a privacy and security lab building
+      open tools, conducted research, and real infrastructure —
+      not for corporations or governments to profit from, but for you.
+    </p>
+    <div class="mt-24" style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <a href="tools.html" class="btn btn-primary">View Our Tools →</a>
+      <a href="about.html" class="btn btn-ghost">Read Our Story</a>
+    </div>
+
+    <!-- Live status readout — the signature element -->
+    <div class="data-block mt-48" id="status-block">
+      <span class="dim">$</span> rnsl --status
+      <br><br>
+      <span class="skel">repos     : loading...</span><br>
+      <span class="skel">stars     : loading...</span><br>
+      <span class="skel">status    : loading...</span><br>
+      <span class="skel">synced    : loading...</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ MISSION ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">why we exist</div>
+    <h2>Every app is listening.<br>Every click is logged.</h2>
+    <p class="lede mt-24">
+      This isn't paranoia — it's the default state of the modern internet.
+      Most "privacy" products are built by companies that profit from
+      the same surveillance economy they claim to fight. We're building
+      something different.
+    </p>
+
+    <div class="grid-3 mt-48">
+      <div class="card">
+        <h3 style="color: var(--signal)">No surveillance</h3>
+        <p class="mt-16">We don't collect data we don't need, and never sell what we do collect.</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--signal)">No backdoors</h3>
+        <p class="mt-16">~90% open source. Inspect it, audit it, trust it for yourself.</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--signal)">No compromises</h3>
+        <p class="mt-16">Privacy isn't a feature we bolt on. It's the foundation we build from.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ LATEST RELEASES (live) ============ -->
+<section>
+  <div class="wrap">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <div class="eyebrow">shipped</div>
+        <h2>Latest from the lab</h2>
+      </div>
+      <a href="tools.html" class="mono dim" style="font-size: 13px;">View all →</a>
+    </div>
+
+    <div class="grid-3 mt-48" id="latest-repos">
+      <div class="card"><div class="skel" style="height: 100px;"></div></div>
+      <div class="card"><div class="skel" style="height: 100px;"></div></div>
+      <div class="card"><div class="skel" style="height: 100px;"></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ FOUNDER ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">the architect</div>
+    <div class="grid-2" style="align-items: center; gap: 48px;">
+      <div>
+        <h2>Built by one person.<br>No funding. No team.</h2>
+        <p class="mt-24">
+          Raven started RNSL with no resources, no investors —
+          just a phone, a terminal, and the belief that privacy
+          shouldn't be a privilege reserved for those who can afford it
+          or understand it.
+        </p>
+        <p class="mt-16">
+          From writing the first tools in Termux to architecting the
+          infrastructure RNSL runs on today, this lab represents what's
+          possible when conviction outweighs resources.
+        </p>
+        <a href="about.html" class="btn btn-ghost mt-24">Read the full story →</a>
+      </div>
+      <div class="card center" style="padding: 48px 24px;">
+        <div class="mono" style="font-size: 48px; color: var(--signal);">🦅</div>
+        <div class="mono mt-16" style="font-weight: 700; font-size: 18px;">Raven</div>
+        <div class="mono dim mt-8" style="font-size: 13px;">Founder, RX Network Security Labs</div>
+        <div class="pill mt-24"><span class="dot"></span> Building since June 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ CONNECT ============ -->
+<section>
+  <div class="wrap center">
+    <div class="eyebrow center" style="justify-content: center;">join the lab</div>
+    <h2>Find us where you already are.</h2>
+    <div class="mt-48" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="https://github.com/RX-Network-Security-Labs" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://t.me/rxnetworksecuritylabs" class="btn btn-ghost" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://discord.gg/nWt82zV3s4" class="btn btn-ghost" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>// RNSL — Building what the world needs, quietly.</div>
+    <div style="display: flex; gap: 20px;">
+      <a href="https://github.com/RX-Network-Security-Labs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://t.me/rxnetworksecuritylabs" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://discord.gg/nWt82zV3s4" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/rnsl-data.js"></script>
+<script>
+(async function() {
+  const repos = await rnslFetchRepos();
+  const statusBlock = document.getElementById("status-block");
+  const latestEl = document.getElementById("latest-repos");
+
+  if (repos === null) {
+    statusBlock.innerHTML = `<span class="dim">$</span> rnsl --status\n\n<span style="color:#e05555">error: could not reach GitHub API. try again shortly.</span>`;
+    latestEl.innerHTML = `<p class="dim">Couldn't load repos right now — <a href="https://github.com/RX-Network-Security-Labs" style="color:var(--signal)">view on GitHub →</a></p>`;
+    return;
+  }
+
+  const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+  const now = new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC";
+
+  statusBlock.innerHTML =
+`<span class="dim">$</span> rnsl --status
+
+repos     : <span style="color:var(--signal)">${repos.length}</span>
+stars     : <span style="color:var(--signal)">${totalStars}</span>
+status    : <span style="color:var(--signal)">ACTIVE</span>
+synced    : ${now}`;
+
+  if (repos.length === 0) {
+    latestEl.innerHTML = `<div class="card center" style="grid-column: 1 / -1;"><p>No releases yet — first drop incoming. <a href="https://github.com/RX-Network-Security-Labs" style="color:var(--signal)">Watch on GitHub →</a></p></div>`;
+    return;
+  }
+
+  const sorted = [...repos].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+  const top3 = sorted.slice(0, 3);
+
+  latestEl.innerHTML = top3.map(r => `
+    <a href="${r.html_url}" target="_blank" rel="noopener" class="card" style="display:block;">
+      <div style="display:flex; justify-content:space-between; align-items:start;">
+        <h3 class="mono" style="font-size:16px;">${rnslEscapeHtml(r.name)}</h3>
+        <span class="mono faint" style="font-size:11px;">${rnslTimeAgo(r.updated_at)}</span>
+      </div>
+      <p class="mt-16" style="font-size:14px;">${rnslEscapeHtml(r.description || "No description yet.")}</p>
+      <div class="mt-16" style="display:flex; gap:14px; align-items:center;">
+        ${r.language ? `<span class="mono faint" style="font-size:12px;"><span style="color:${rnslLangColor(r.language)}">●</span> ${rnslEscapeHtml(r.language)}</span>` : ""}
+        <span class="mono faint" style="font-size:12px;">★ ${r.stargazers_count || 0}</span>
+      </div>
+    </a>
+  `).join("");
+})();
+</script>
+
+</body>
+</html>
